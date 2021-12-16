@@ -1,27 +1,22 @@
-import { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import s from './Statistics.module.scss';
 
-export class Statistics extends Component {
-  countPositiveFeedbackPercentage = () => {
-    const { good, neutral, bad } = this.props;
-
+export function Statistics({ good, neutral, bad, total }) {
+  const countPositiveFeedbackPercentage = () => {
     return Math.floor((good / (good + neutral + bad)) * 100);
   };
 
-  render() {
-    const { good, neutral, bad, total } = this.props;
-    const positiveFeedback = this.countPositiveFeedbackPercentage();
-    return (
-      <ul>
-        <li className={s.element}>Good:{good}</li>
-        <li className={s.element}>Neutral:{neutral}</li>
-        <li className={s.element}>Bad:{bad}</li>
-        <li className={s.element}>Total:{total}</li>
-        <li className={s.element}>Positive feedback:{positiveFeedback}%</li>
-      </ul>
-    );
-  }
+  return (
+    <ul>
+      <li className={s.element}>Good:{good}</li>
+      <li className={s.element}>Neutral:{neutral}</li>
+      <li className={s.element}>Bad:{bad}</li>
+      <li className={s.element}>Total:{total}</li>
+      <li className={s.element}>
+        Positive feedback:{countPositiveFeedbackPercentage()}%
+      </li>
+    </ul>
+  );
 }
 
 Statistics.propTypes = {

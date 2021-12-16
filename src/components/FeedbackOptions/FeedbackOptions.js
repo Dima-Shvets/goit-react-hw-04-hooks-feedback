@@ -1,31 +1,26 @@
-import { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import s from './FeedbackOptions.module.scss';
 
-export class FeedbackOptions extends Component {
-  capitalize = string => {
+export function FeedbackOptions({ options, onLeaveFeedback }) {
+  const capitalize = string => {
     return string[0].toUpperCase() + string.substring(1);
   };
 
-  render() {
-    const options = Object.keys(this.props.options);
-    return (
-      <ul className={s.list}>
-        {options.map(option => {
-          return (
-            <li key={option} className={s.element}>
-              <button
-                type="button"
-                onClick={() => this.props.onLeaveFeedback(option)}
-              >
-                {this.capitalize(option)}
-              </button>
-            </li>
-          );
-        })}
-      </ul>
-    );
-  }
+  const optionNames = Object.keys(options);
+
+  return (
+    <ul className={s.list}>
+      {optionNames.map(option => {
+        return (
+          <li key={option} className={s.element}>
+            <button type="button" onClick={() => onLeaveFeedback(option)}>
+              {capitalize(option)}
+            </button>
+          </li>
+        );
+      })}
+    </ul>
+  );
 }
 
 FeedbackOptions.protoTypes = {

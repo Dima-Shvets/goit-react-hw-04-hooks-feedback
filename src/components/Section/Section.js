@@ -1,20 +1,16 @@
 import { PropTypes } from 'prop-types';
-import { Component } from 'react';
+import { useState } from 'react';
 import s from './Sectiom.module.scss';
 
-export class Section extends Component {
-  state = {
-    title: this.props.title,
-  };
+export function Section({ titleName, children }) {
+  const [title] = useState(titleName);
 
-  render() {
-    return (
-      <section className={s.section}>
-        <h2 className={s.title}>{this.state.title}</h2>
-        {this.props.children}
-      </section>
-    );
-  }
+  return (
+    <section className={s.section}>
+      <h2 className={s.title}>{title}</h2>
+      {children}
+    </section>
+  );
 }
 
 Section.protoTypes = {
